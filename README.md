@@ -12,6 +12,18 @@ A Python-based network security tool that captures live traffic and detects susp
 - JSON alert logging with timestamps and hostnames
 - Session summary report
 
+## Installation
+```bash
+pip install scapy
+```
+Also requires [Npcap](https://npcap.com) on Windows.
+
+## Usage
+```bash
+python sniffer.py
+```
+Press `CTRL+C` to stop and generate the session report.
+
 ## Demo
 Running the tool and triggering a port scan with Nmap:
 
@@ -50,18 +62,6 @@ The tool uses Scapy to capture raw packets off the network interface. Each packe
 - **Suspicious ports** — traffic to known malicious ports (23, 4444, 6667, 1337, 31337)
 
 All alerts are saved to `alerts.json` with timestamps and a session summary on exit.
-
-## Installation
-```bash
-pip install scapy
-```
-Also requires [Npcap](https://npcap.com) on Windows.
-
-## Usage
-```bash
-python sniffer.py
-```
-Press `CTRL+C` to stop and generate the session report.
 
 ## Tech Stack
 - Python 3
