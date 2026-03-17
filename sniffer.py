@@ -11,20 +11,26 @@ port_tracker = defaultdict(set)
 packet_counter = defaultdict(int)
 last_reset = time.time()
 alerts = []
-alerted_ips = set()
+alerted_ips = set() #Prevents duplicate alerts for the same IP
 
+#Known suspicious ports often used by malware or unauthorized access attempts
 SUS_PORTS = {23, 4444, 6667, 1337, 31337}
+#IPs excluded from high traffic and port scan alerts
 WHITELIST = {
     "142.250.177.78",    # Google
 }
 PORT_SCAN_THRESHOLD = 10
 HIGH_TRAFFIC_THRESHOLD = 1000
 RESET_INTERVAL = 60
+
+#Translates Ip addresses to hostnames for better readability in alerts
 def resolve_ip(ip):
     try:
         return socket.gethostbyaddr(ip)[0]
     except socket.herror:
         return ip
+
+#Processes each captured packet: extracts IPs, tracks ports and counts, and runs detection logic.   
 def analyze_packet(packet):
     global last_reset
 
@@ -88,7 +94,7 @@ def analyze_packet(packet):
             alerts.append(alert)
             print(f"SUSPICIOUS PORT | {resolve_ip(src)} ({src}) -> {dst} | Port: {packet[TCP].dport}\n")
 
-
+#Runs on exit and calculates session stats, saves alerts to JSON, and prints summary report
 def save_alerts():
   end_time = datetime.now()
   duration = int(end_time.timestamp() - last_reset)
@@ -118,5 +124,5 @@ def save_alerts():
 
 atexit.register(save_alerts)
 
-print("Starting packet capture... Press CTRL+C to stop")
+print("Starting packet capture. Press CTRL+C to stop")
 sniff(prn=analyze_packet, store=False)
