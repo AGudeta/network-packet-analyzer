@@ -32,26 +32,42 @@ Running the tool and triggering a port scan with Nmap:
 Example alert output (`alerts.json`):
 ```json
 {
-    "session_end": "2026-03-16 19:35:17",
-    "duration_seconds": 58,
-    "total_packets_captured": 673,
-    "total_alerts": 2,
-    "top_talker": "192.168.1.9",
-    "top_talker_packets": 344,
-    "alerts": [
-        {
-            "time": "2026-03-16 19:34:48",
-            "type": "SUSPICIOUS PORT",
-            "src": "192.168.1.9",
-            "details": "Hit port 23"
-        },
-        {
-            "time": "2026-03-16 19:34:48",
-            "type": "PORT SCAN",
-            "src": "192.168.1.9",
-            "details": "Hit 10 ports"
-        }
-    ]
+  "session_end": "2026-03-16 20:20:53",
+  "duration_seconds": 32,
+  "total_packets_captured": 6229,
+  "total_alerts": 4,
+  "top_talker": "173.194.133.167",
+  "top_talker_packets": 4293,
+  "alerts": [
+    {
+      "time": "2026-03-16 20:20:32",
+      "type": "SUSPICIOUS PORT",
+      "src": "192.168.X.X",
+      "hostname": "Lenovo1.lan",
+      "details": "Hit port 23"
+    },
+    {
+      "time": "2026-03-16 20:20:32",
+      "type": "PORT SCAN",
+      "src": "192.168.X.X",
+      "hostname": "Lenovo1.lan",
+      "details": "Hit 10 ports"
+    },
+    {
+      "time": "2026-03-16 20:20:43",
+      "type": "PORT SCAN",
+      "src": "192.168.X.X",
+      "hostname": "SAX1VR.lan",
+      "details": "Hit 10 ports"
+    },
+    {
+      "time": "2026-03-16 20:20:47",
+      "type": "HIGH TRAFFIC",
+      "src": "173.194.133.167",
+      "hostname": "ord38s51-in-f7.1e100.net",
+      "details": "Sent 1000 packets"
+    }
+  ]
 }
 ```
 
